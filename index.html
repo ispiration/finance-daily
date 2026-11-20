@@ -1,1 +1,122 @@
-日報準備中
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的財經日報・2026-11-20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  /* 只要改「我的設定」的主色，整頁的重點色就跟著換 */
+  :root {
+    --accent: #b0412e;
+    --paper: #f6f3ec; --card: #ffffff; --ink: #1c1a17; --soft: #5c5850; --faint: #8f8a80;
+    --line: #e3ddd1; --tint: color-mix(in srgb, var(--accent) 9%, var(--card));
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --sans: "Noto Sans TC", -apple-system, "PingFang TC", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16150f; --card: #211f19; --ink: #f1ede4; --soft: #c2bcb0; --faint: #8b857a;
+      --line: #36322a; --tint: color-mix(in srgb, var(--accent) 18%, var(--card));
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.7; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* 刊頭 */
+  header.wrap { padding-top: 28px; }
+  .dateline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--soft); border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+  header h1 { font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 8vw, 64px); line-height: 1.15; text-align: center; margin: 18px 0 12px; letter-spacing: .04em; }
+  header h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--accent); margin: 14px auto 0; border-radius: 2px; }
+  .edition { text-align: center; color: var(--soft); font-size: 14px; margin: 0 0 18px; }
+  .edition b { color: var(--accent); }
+
+  /* 分類導覽：手機可以左右滑 */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(8px); border-top: 3px double var(--ink); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav a { flex: none; font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); white-space: nowrap; }
+  nav a b { margin-left: 6px; color: var(--accent); font-weight: 700; }
+  nav a:hover { border-color: var(--accent); }
+
+  main.wrap { padding-top: 28px; padding-bottom: 40px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--accent); font-weight: 700; margin: 0 0 6px; }
+
+  /* 今日首選 */
+  .pick { position: relative; background: var(--card); border-radius: 18px; padding: 28px 32px; margin-bottom: 36px; box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(0,0,0,.25); overflow: hidden; }
+  .pick::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--accent); }
+  .pick-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .pick h2 { margin: 0; font-size: 14px; letter-spacing: .2em; color: var(--accent); }
+  .pick-score { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--soft); }
+  .dots { display: inline-flex; gap: 4px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); }
+  .dots i.on { background: var(--accent); }
+  .pick h3 { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3.6vw, 36px); line-height: 1.4; margin: 14px 0 14px; }
+  .pick h3 a:hover { color: var(--accent); }
+  .pick-why { background: var(--tint); border-radius: 12px; padding: 14px 18px; margin: 0 0 16px; font-size: 16px; }
+  .pick-why strong { color: var(--accent); }
+  .pick-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pick-tags span { background: var(--accent); color: #fff; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 500; }
+  .pick .meta { margin: 14px 0 0; color: var(--faint); font-size: 13px; }
+
+  /* 本週熱詞 */
+  div.hot { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; margin-bottom: 40px; }
+  div.hot h2 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  div.hot > p { margin: 2px 0 14px; color: var(--faint); font-size: 13px; }
+  div.hot ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px 28px; }
+  div.hot li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  div.hot .word { font-weight: 700; }
+  div.hot .word b { display: inline-block; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 6px; background: var(--accent); color: #fff; margin-left: 4px; vertical-align: 2px; }
+  div.hot .word b.b-new { background: var(--ink); color: var(--paper); }
+  div.hot .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  div.hot .bar span { display: block; height: 100%; background: var(--faint); border-radius: 3px; }
+  div.hot li.hot .bar span, div.hot li.new .bar span { background: var(--accent); }
+  div.hot .num { font-size: 12px; color: var(--faint); }
+
+  /* 各類別 */
+  section.cat { margin-bottom: 40px; scroll-margin-top: 64px; }
+  section.cat h2 { font-family: var(--serif); font-size: 26px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  section.cat h2 small { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease; }
+  article:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(0,0,0,.35); }
+  article .src { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 6px; font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+  article .src time { color: var(--faint); font-weight: 400; }
+  article h3 { font-family: var(--serif); font-size: 19px; line-height: 1.5; margin: 0 0 10px; }
+  article h3 a:hover { color: var(--accent); }
+  .short { font-weight: 700; margin: 0 0 6px; }
+  .long { color: var(--soft); font-size: 15px; margin: 0 0 12px; }
+  .kws { margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .kw { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--paper); color: var(--soft); border: 1px solid var(--line); }
+  .kw.is-hot { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--faint); font-size: 13px; text-align: center; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .pick { padding: 22px 20px 22px 24px; border-radius: 14px; }
+    div.hot { padding: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .dateline span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="dateline"><span>2026-11-20・台北時間</span><span>資料期間 2026-11-14 至 2026-11-20 對比 2026-10-24 至 2026-11-13</span></div>
+  <h1>我的財經日報</h1>
+  <p class="edition">本期 <b>20</b> 則・由 n8n 與 Gemini 自動編輯</p>
+</header>
+<nav aria-label="新聞分類"><div class="wrap"><a href="#cat-2">地緣政治<b>3</b></a><a href="#cat-3">貨幣政策<b>3</b></a><a href="#cat-7">美債殖利率<b>2</b></a></div></nav>
+<main class="wrap">
+  <section class="pick" aria-labelledby="pick-title"><div class="pick-heading"><h2 id="pick-title">今日首選</h2><span class="pick-score"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>3 分／滿分 4 分</span></div><h3><a href="https://www.bloomberg.com/news/articles/2026-11-20/ai-fueled-cyberattacks-drive-claims-surge-at-japan-insurers" target="_blank" rel="noopener noreferrer">Cyberattacks Drive Claims Surge at Japan Insurers</a></h3><p class="pick-why"><strong>為什麼值得發：</strong>點名日本保險業並涉及 AI 攻擊導致的理賠業務變化。</p><div class="pick-tags"><span>在地／點名</span><span>具體</span><span>跟工作有關</span></div><p class="meta">iThome・其他</p></section>
+  <div class="hot"><p class="eyebrow">TRENDING</p><h2>本週熱詞</h2><p>本週出現次數對比前三週平均（Asia/Taipei）</p><ul><li class="hot"><span class="word">AI Selloff <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 3 次・平常每週 0 次・4 倍</span></li><li class="hot"><span class="word">APEC <b>熱</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 5 次・平常每週 1 次・3 倍</span></li><li class="hot"><span class="word">Oil <b>熱</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 3 次・平常每週 0.33 次・3 倍</span></li><li class="hot"><span class="word">Bond Yields <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">Copper <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">Gold <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">Treasuries <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">China <b>熱</b></span><span class="bar"><span style="width:54%"></span></span><span class="num">本週 4 次・平常每週 1.33 次・2.14 倍</span></li><li class=""><span class="word">2026 High</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li><li class=""><span class="word">ARK Invest</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li></ul></div>
+  <section class="cat" id="cat-2"><h2>地緣政治 <small>3 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/20 12:50</time></p><h3><a href="https://www.bloomberg.com/news/articles/2026-11-20/china-has-capacity-but-maybe-not-the-will-to-boost-fuel-exports" target="_blank" rel="noopener noreferrer">China Has Capacity, But Maybe Not the Will to Boost Fuel Exports</a></h3><p class="short">中國有能力但未必會增加燃油出口</p><p class="long">中國在與美國及俄羅斯達成協議後，具備提升全球燃油供應的能力。然而，目前尚不清楚北京政府是否會落實增加出口的行動。中國擁有強大的供應潛力，但政策意願仍具不確定性。</p><p class="kws"><span class="kw is-hot">China</span><span class="kw">fuel supplies</span><span class="kw">Beijing</span></p></article><article><p class="src">iThome<time>11/20 12:32</time></p><h3><a href="https://www.bloomberg.com/news/articles/2026-11-20/pakistan-minister-makes-rare-india-visit-for-regional-forum" target="_blank" rel="noopener noreferrer">Pakistan Minister Makes Rare India Visit for Regional Forum</a></h3><p class="short">巴基斯坦部長進行罕見訪印之旅</p><p class="long">巴基斯坦氣候變遷部長馬立克週五抵達新德里，參加為期兩天的區域論壇。這是自 2023 年以來，兩國間首次的高層訪問。此行旨在參與區域性論壇的討論。</p><p class="kws"><span class="kw">Musadik Malik</span><span class="kw">New Delhi</span><span class="kw">Pakistan</span></p></article><article><p class="src">iThome<time>11/20 11:01</time></p><h3><a href="https://www.bloomberg.com/news/videos/2026-11-20/trump-offers-xi-a-helping-hand-on-escalator-video" target="_blank" rel="noopener noreferrer">Trump Offers Xi a Helping Hand on Escalator</a></h3><p class="short">川普與習近平於峰會互動受矚</p><p class="long">在第三次峰會期間，80 歲的川普向 73 歲的習近平伸出援手。習近平在踏上扶梯時扶住川普的前臂。兩位領導人在正式會議外展現了互動細節。</p><p class="kws"><span class="kw">Donald Trump</span><span class="kw">Xi Jinping</span><span class="kw">summit</span></p></article></div></section><section class="cat" id="cat-3"><h2>貨幣政策 <small>3 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/20 13:09</time></p><h3><a href="https://www.bloomberg.com/news/videos/2026-11-20/cambodia-sees-growth-risk-as-high-us-rates-hit-economy-video" target="_blank" rel="noopener noreferrer">Cambodia Sees Growth Risk as High US Rates Hit Economy</a></h3><p class="short">美高利率衝擊柬埔寨經濟成長</p><p class="long">柬埔寨央行總裁謝絲蕾表示，該國正面臨美國高利率帶來的經濟壓力。輸入型通膨與融資成本上升正影響增長前景。美國利率維持高位對當地經濟構成顯著風險。</p><p class="kws"><span class="kw">National Bank of Cambodia</span><span class="kw">Chea Serey</span><span class="kw">US rates</span></p></article><article><p class="src">iThome<time>11/20 12:15</time></p><h3><a href="https://www.bloomberg.com/news/articles/2026-11-20/pboc-anchors-yuan-with-stable-fix-as-volatility-jumps-after-apec" target="_blank" rel="noopener noreferrer">PBOC Anchors Yuan With Stable Fix as Volatility Jumps After APEC</a></h3><p class="short">中國央行於 APEC 後力穩人民幣</p><p class="long">中國央行週五透過穩定的中間價，釋放遏制人民幣大幅波動的訊號。此前人民幣剛經歷大幅下跌。央行意在穩定市場情緒並控制貨幣走勢。</p><p class="kws"><span class="kw">PBOC</span><span class="kw">Yuan</span><span class="kw is-hot">APEC</span></p></article><article><p class="src">iThome<time>11/20 07:56</time></p><h3><a href="https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff" target="_blank" rel="noopener noreferrer">Gold Set for Worst Week Since March on Hawkish Fed, AI Selloff</a></h3><p class="short">聯準會鷹派言論致金價週線重挫</p><p class="long">金價連續第五天下跌，創下自三月以來最大週跌幅。聯準會官員的鷹派訊號暗示將進一步升息。人工智慧股的拋售也影響了貴金屬市場的資金流動。</p><p class="kws"><span class="kw is-hot">Gold</span><span class="kw">Federal Reserve</span><span class="kw">interest-rate hikes</span></p></article></div></section><section class="cat" id="cat-7"><h2>美債殖利率 <small>2 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/20 12:33</time></p><h3><a href="https://www.bloomberg.com/news/articles/2026-11-20/treasuries-eye-longest-rally-in-five-months-on-haven-demand" target="_blank" rel="noopener noreferrer">Treasuries Eye Longest Rally in Five Months on Haven Demand</a></h3><p class="short">避險需求帶動美債連續五月上漲</p><p class="long">美債正迎來近五個月來最長漲勢。市場對人工智慧貿易的疑慮日益加深，導致全球股市出現大跌。投資者在股市動盪中紛紛轉向國債市場避險。</p><p class="kws"><span class="kw is-hot">Treasuries</span><span class="kw">artificial intelligence</span><span class="kw">stock selloff</span></p></article><article><p class="src">iThome<time>11/20 10:31</time></p><h3><a href="https://www.bloomberg.com/news/newsletters/2026-11-20/rising-bond-yields-may-pose-a-challenge-to-nifty-s-sharp-rebound" target="_blank" rel="noopener noreferrer">Rising Bond Yields May Pose a Challenge to Nifty’s Sharp Rebound</a></h3><p class="short">債券殖利率上升挑戰印度股市反彈</p><p class="long">印度 Nifty 指數自 10 月初以來已反彈近 15%，推高了市場估值。然而，不斷上升的債券殖利率可能對這一漲勢構成挑戰。市場正評估高估值下的債市壓力。</p><p class="kws"><span class="kw">Nifty</span><span class="kw is-hot">Bond Yields</span><span class="kw">October</span></p></article></div></section>
+</main>
+<footer><div class="wrap">這份日報每天早上由我自己做的 n8n 流程自動產生</div></footer>
+</body>
+</html>
